@@ -1,0 +1,12 @@
+{
+    "attributes" : [ {
+        "trait_type" : "Breed",
+        "value" : "Maltipoo"
+    }, {
+        "trait_type" : "Eye color",
+        "value" : "Mocha"
+    } ],
+    "description" : "pink kaonashi",
+    "image" : "https://gateway.pinata.cloud/ipfs/QmVcFRDvjfyoP9ZuUAg3Xz2XKyfNcZZcYFBA3dKFnKNHRs",
+    "name" : "Kaonashi"
+}
