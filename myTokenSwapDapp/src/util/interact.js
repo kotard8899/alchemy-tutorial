@@ -112,7 +112,7 @@ export const swapToYNT = async (address, ethNum) => {
 
     const amountOutMin = '1' + Math.random().toString().slice(2,6);
     const abi = require('../contractABI.json');
-    const contract = new web3.eth.Contract(abi, '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D', {from: myAddress.address})
+    const contract = new web3.eth.Contract(abi, contractAddress, { from: myAddress })
     const tokenAddress = '0x7ec093f797dad5422e44f9b201ef8ef8fd53669f'; // token I created
     const WETHAddress = '0xc778417e063141139fce010982780140aa0cd5ab';
 
