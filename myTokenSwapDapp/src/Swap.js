@@ -60,8 +60,8 @@ const Swap = () => {
     };
 
     const swap = async () => {
-        const status = await swapToYNT(walletAddress, ethNum);
-        console.log('swap', status);
+        const { status } = await swapToYNT(walletAddress, ethNum);
+        setStatus(status);
     };
 
     const changeInput = (e) => {
@@ -101,7 +101,7 @@ const Swap = () => {
                     1 ETH = {price} YNT
                 </div>
                 <button onClick={swap} className="swap-btn">兌換</button>
-                <span className="swap-status">{status}</span>
+                <div className="swap-status">{status}</div>
             </div>
         </div>
     )
