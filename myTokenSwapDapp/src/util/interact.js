@@ -3,19 +3,6 @@ const alchemyKey = process.env.REACT_APP_ALCHEMY_KEY;
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3(alchemyKey);
 
-const contractABI = require("../contract-abi.json");
-const contractAddress = "0x76812aBc55c826dE3EE3A8c9Eec35E2398E98E4e";
-
-export const helloWorldContract = new web3.eth.Contract(
-    contractABI,
-    contractAddress
-);
-
-export const loadCurrentMessage = async () => { 
-    const message = await helloWorldContract.methods.message().call();
-    return message;
-};
-
 export const connectWallet = async () => {
     if (window.ethereum) {
         try {
@@ -94,50 +81,6 @@ export const getCurrentWalletConnected = async () => {
     }
 };
 
-export const updateMessage = async (address, message) => {
-    if (!window.ethereum || address === null) {
-        return {
-            status: "💡 Connect your Metamask wallet to update the message on the blockchain.",
-        }
-    };
-
-    if (message.trim() === "") {
-        return {
-            status: "❌ Your message cannot be an empty string.",
-        }
-    };
-
-    const txParams = {
-        to: contractAddress,
-        from: address,
-        data: helloWorldContract.methods.update(message).encodeABI()
-    };
-
-    try {
-        const txHash = await window.ethereum.request({
-            method:"eth_sendTransaction",
-            params: [txParams]
-        });
-        return {
-            status: (
-                <span>
-                    ✅{" "}
-                    <a target="_blank" rel="noreferrer" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
-                        View the status of your transaction on Etherscan!
-                    </a>
-                    <br />
-                    ℹ️ Once the transaction is verified by the network, the message will
-                    be updated automatically.
-                </span>
-            )
-        }
-    } catch (err) {
-        return {
-            status: "😥 " + err.message,
-        };
-    };
-};
-
 export const getPrice = async () => {
     const { ChainId, Token, WETH, Fetcher, Route } = require("@uniswap/sdk");
     
@@ -189,8 +132,6 @@ export const swapToYNT = async (address, ethNum) => {
         data: data.encodeABI(),
     };
 
-    // const signedTx = await web3.eth.accounts.signTransaction(transaction, PRIVATE_KEY);
-
     try {
         const txHash = await window.ethereum.request({
             method:"eth_sendTransaction",
@@ -214,11 +155,4 @@ export const swapToYNT = async (address, ethNum) => {
             status: "😥 " + err.message,
         };
     };
-
-    // web3.eth.sendSignedTransaction(signedTx.rawTransaction, (error, hash) => {
-    //     if (error) {
-    //         return console.log("❗Something went wrong while submitting your transaction:", error);
-    //     }
-    //     console.log("🎉 The hash of your transaction is: ", hash);
-    // });
 };

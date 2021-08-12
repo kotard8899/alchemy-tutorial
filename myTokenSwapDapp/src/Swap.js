@@ -14,17 +14,12 @@ import {
 const Swap = () => {
     const [walletAddress, setWallet] = useState("");
     const [status, setStatus] = useState("");
-    const [message, setMessage] = useState("No connection to the network."); //default message
-    const [newMessage, setNewMessage] = useState("");
     const [price, setPrice] = useState(0);
     const [ethNum, setEthNum] = useState("");
     const [yntNum, setYntNum] = useState("");
     
     useEffect(() => {
         async function fetchData() {
-            const message = await loadCurrentMessage();
-            setMessage(message);
-            addSmartContractListener();
 
             const { address, status } = await getCurrentWalletConnected();
             setWallet(address);
@@ -36,18 +31,6 @@ const Swap = () => {
         }
         fetchData();
     }, []);
-
-    function addSmartContractListener() {
-        helloWorldContract.events.UpdatedMessages({}, (err, data) => {
-            if (err) {
-                setStatus("😥 " + err.message);
-            } else {
-                setMessage(data.returnValues[1]);
-                setNewMessage("");
-                setStatus("🎉 Your message has been updated!");
-            }
-        })
-    }
 
     function addWalletListener() {
         if (window.ethereum) {
