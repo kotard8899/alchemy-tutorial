@@ -100,7 +100,7 @@ const Swap = () => {
                 <div className="rate">
                     1 ETH = {price} YNT
                 </div>
-                <button onClick={swap} className="swap-btn">兌換</button>
+                <button disabled={!walletAddress} style={{backgroundColor: !walletAddress && 'grey' }} onClick={swap} className="swap-btn">兌換</button>
                 <div className="swap-status">{status}</div>
             </div>
         </div>
