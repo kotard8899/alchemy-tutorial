@@ -1,11 +1,7 @@
-import { Price } from "@uniswap/sdk";
 import React from "react";
 import { useEffect, useState } from "react";
 import {
-    helloWorldContract,
     connectWallet,
-    updateMessage,
-    loadCurrentMessage,
     getCurrentWalletConnected,
     getPrice,
     swapToYNT
